@@ -64,6 +64,7 @@
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\ICommandUndo.cs" />
     <Compile Include="Common\MyICommand.cs" />
+    <Compile Include="Database\Database.cs" />
     <Compile Include="Extension\ColorConverter.cs" />
     <Compile Include="Model\EntityType.cs" />
     <Compile Include="Model\Filter.cs" />

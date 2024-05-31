@@ -1,15 +1,13 @@
 ﻿using NetworkService.Common;
+using NetworkService.Database;
 using NetworkService.Model;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace NetworkService.ViewModel
 {
@@ -162,6 +160,7 @@ namespace NetworkService.ViewModel
         private int _radioSelectedValue = -1;
         public int RadioSelectedValue { get => _radioSelectedValue; set => _radioSelectedValue = value; }
         #endregion
+
         public ObservableCollection<T4_Entity> SavedList = new ObservableCollection<T4_Entity>();
         public MyICommand AddCommand { get; set; }
         public MyICommand DeleteCommand { get; set; }
@@ -227,6 +226,14 @@ namespace NetworkService.ViewModel
             TableEntityList.Add(tempEntity);
             AddedEntities.Push(tempEntity);
             StackOfOperations.Push(true);
+            Database.Database.Entities.Add(tempEntity);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var smt in Database.Database.Entities)
+            {
+                sb.Append(smt.Name.ToString() + "\n");
+            }
+            MessageBox.Show(sb.ToString());
 
             SavedList.Clear();
             foreach (var entity in EntityList)
@@ -237,18 +244,17 @@ namespace NetworkService.ViewModel
 
         private void OnDelete()
         {
-            //MessageBox.Show("Hey I am here");
             var itemToRemove = EntityList.Where(item => item.Id == SelectedEntity.Id).FirstOrDefault();
             EntityList.Remove(itemToRemove);
             SavedList.Remove(itemToRemove);
             TableEntityList.Remove(itemToRemove);
             DeletedEntities.Push(itemToRemove);
+            Database.Database.Entities.Remove(itemToRemove);
             StackOfOperations.Push(false);
         }
 
         private void OnFilter()
         {
-            //MessageBox.Show($"{SelectedTypeForFiltering} {ItemIdTextBox} {(FilterRadioEnum)RadioSelectedValue} je selektovan");
             var parsedTypeForFiltering = (EntityType)Enum.Parse(typeof(EntityType), SelectedTypeForFiltering);
             var radioSelectedValue = (FilterRadioEnum)RadioSelectedValue;
             Filter newFilter = new Filter(parsedTypeForFiltering, Convert.ToInt32(ItemIdTextBox), radioSelectedValue);
@@ -331,6 +337,8 @@ namespace NetworkService.ViewModel
                     T4_Entity removedAddedEntity = (T4_Entity)AddedEntities.Pop();
                     EntityList.Remove(removedAddedEntity);
                     TableEntityList.Remove(removedAddedEntity);
+
+                    Database.Database.Entities.Remove(removedAddedEntity);
                 }
                 else
                 {
@@ -338,6 +346,8 @@ namespace NetworkService.ViewModel
                     T4_Entity removedDeletedEntity = (T4_Entity)DeletedEntities.Pop();
                     EntityList.Add(removedDeletedEntity);
                     TableEntityList.Add(removedDeletedEntity);
+
+                    Database.Database.Entities.Add(removedDeletedEntity);
                 }
             }
         }

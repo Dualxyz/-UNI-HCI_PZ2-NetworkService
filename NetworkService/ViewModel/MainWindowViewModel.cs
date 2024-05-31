@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace NetworkService.ViewModel
 {
     public class MainWindowViewModel
     {
-        private int count = 15; // Inicijalna vrednost broja objekata u sistemu
-                                // ######### ZAMENITI stvarnim brojem elemenata
-                                //           zavisno od broja entiteta u listi
+        private int id;
+        private double value;
+        private bool file;
+        private readonly Uri path = new Uri("LogFile.txt", UriKind.Relative);
 
         public MainWindowViewModel()
         {
@@ -48,7 +51,7 @@ namespace NetworkService.ViewModel
                              * duzinu liste koja sadrzi sve objekte pod monitoringom, odnosno
                              * njihov ukupan broj (NE BROJATI OD NULE, VEC POSLATI UKUPAN BROJ)
                              * */
-                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(count.ToString());
+                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(Database.Database.Entities.Count.ToString());
                             stream.Write(data, 0, data.Length);
                         }
                         else
@@ -59,7 +62,15 @@ namespace NetworkService.ViewModel
                             //################ IMPLEMENTACIJA ####################
                             // Obraditi poruku kako bi se dobile informacije o izmeni
                             // Azuriranje potrebnih stvari u aplikaciji
-
+                            string[] split = incomming.Split('_', ':');
+                            id = Int32.Parse(split[1]);
+                            value = Double.Parse(split[2]);
+                            Console.WriteLine($"Changing the {id} to {value}");
+                            if (Database.Database.Entities.Count() > 0 && (Database.Database.Entities.Count() > id) && value <= 5 && value >= 1)
+                            {
+                                Database.Database.Entities[id].Value = value;
+                                WriteLog(Database.Database.Entities[id].Id, Database.Database.Entities[id].Value);
+                            }
                         }
                     }, null);
                 }
@@ -67,6 +78,27 @@ namespace NetworkService.ViewModel
 
             listeningThread.IsBackground = true;
             listeningThread.Start();
+        }
+
+        private void WriteLog(int id, double value)
+        {
+            if (!file)
+            {
+                StreamWriter wr;
+                using (wr = new StreamWriter(path.ToString()))
+                {
+                    wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
+                }
+            }
+            else
+            {
+                StreamWriter wr;
+                using (wr = new StreamWriter(path.ToString(), true))
+                {
+                    wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
+                }
+            }
+            file = true;
         }
     }
 }
