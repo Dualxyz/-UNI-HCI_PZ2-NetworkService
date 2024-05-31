@@ -16,12 +16,12 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:NetworkEntityViewModel}">
-            <views:NetworkEntityView/>
+        <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
+            <views:NetworkDisplayView/>
         </DataTemplate>
     </Window.Resources>
 
     <Grid>
-        <views:NetworkEntityView></views:NetworkEntityView>
+        <views:NetworkDisplayView></views:NetworkDisplayView>
     </Grid>
 </Window>

@@ -10,7 +10,7 @@ using System.Windows.Documents;
 
 namespace NetworkService.ViewModel
 {
-    public class NetworkEntityViewModel : BindableBase
+    public class NetworkDisplayViewModel : BindableBase
     {
         public static int EntityId = 0;
         private ObservableCollection<string> _entityTypeList;
@@ -176,7 +176,7 @@ namespace NetworkService.ViewModel
 
         #endregion
 
-        public NetworkEntityViewModel()
+        public NetworkDisplayViewModel()
         {
             EntityTypeList = new ObservableCollection<string>() { nameof(EntityType.WindGenerator), nameof(EntityType.SolarPanel) };
             TableEntityList = new ObservableCollection<T4_Entity>
