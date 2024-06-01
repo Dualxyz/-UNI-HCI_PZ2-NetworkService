@@ -38,6 +38,10 @@
         <Setter Property="Background" Value="White"></Setter>
     </Style>
 
+    <Style x:Key="GraphTextColor" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Cyan"></Setter>
+    </Style>
+
 
 
 </ResourceDictionary>

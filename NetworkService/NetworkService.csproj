@@ -64,16 +64,22 @@
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\ICommandUndo.cs" />
     <Compile Include="Common\MyICommand.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Extension\ColorConverter.cs" />
+    <Compile Include="Model\CircleMarker.cs" />
     <Compile Include="Model\EntityType.cs" />
     <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\FilterRadioEnum.cs" />
     <Compile Include="Model\StaticData.cs" />
     <Compile Include="Model\T4_Entity.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MeasurementGraphViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntityViewModel.cs" />
+    <Compile Include="Views\MeasurementGraphView.xaml.cs">
+      <DependentUpon>MeasurementGraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NetworkEntitiesView.xaml.cs">
       <DependentUpon>NetworkEntitiesView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +99,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MeasurementGraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NetworkEntitiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +143,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\EntityImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\black.png" />
+    <Resource Include="Images\Icons\graph.png" />
+    <Resource Include="Images\Icons\view.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,8 @@
              xmlns:extension="clr-namespace:NetworkService.Extension"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              MouseLeftButtonDown="Window_MouseLeftButtonDown"
-                >
+
+             >
 
     <UserControl.Resources>
         <ResourceDictionary>

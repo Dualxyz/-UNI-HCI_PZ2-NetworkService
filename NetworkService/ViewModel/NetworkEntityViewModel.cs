@@ -31,6 +31,8 @@ namespace NetworkService.ViewModel
 
         private BindableBase currentViewModel;
         private readonly NetworkEntitiesViewModel _networkEntitiesViewModel = new NetworkEntitiesViewModel();
+        private readonly MeasurementGraphViewModel _measurementGraphViewModel = new MeasurementGraphViewModel();
+        
 
         public BindableBase CurrentViewModel
         {
@@ -48,6 +50,7 @@ namespace NetworkService.ViewModel
         public MyICommand EqualsRadioButtonCommand { get; set; }
         public MyICommand LessRadioButtonCommand { get; set; }
         public MyICommand GreaterRadioButtonCommand { get; set; }
+        public MyICommand<string> NavCommand { get; set; }
 
         public MyICommand<ListView> SelectionChangedCommand { get; set; } // Komanda koja reaguje na izmenu
         public MyICommand MouseLeftButtonUpCommand { get; set; } // Komanda koja reaguje na levi klik
@@ -194,6 +197,7 @@ namespace NetworkService.ViewModel
             FilterCommand = new MyICommand(OnFilter, OnFilterCheck);
             UndoCommand = new MyICommand(OnUndo);
             SelectionChangedCommand = new MyICommand<ListView>(OnSectionChanged);
+            NavCommand = new MyICommand<string>(OnNav);
 
 
             EqualsRadioButtonCommand = new MyICommand(OnEqualsSelect);
@@ -203,6 +207,21 @@ namespace NetworkService.ViewModel
             CurrentViewModel = _networkEntitiesViewModel;
         }
 
+        private void OnNav(string view)
+        {
+            switch (view)
+            {
+                case "NetworkEntity":
+                    CurrentViewModel = _networkEntitiesViewModel;
+                    break;
+                case "MeasurementGraph":
+                    CurrentViewModel = _measurementGraphViewModel;
+                    break;
+                default:
+                    MessageBox.Show($"{view}");
+                    break;
+            }
+        }
         private void OnSectionChanged(ListView obj)
         {
             if (!dragging)
