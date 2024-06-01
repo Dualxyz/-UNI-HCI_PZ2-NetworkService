@@ -12,5 +12,10 @@ namespace NetworkService
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
+
+        private void NetworkDisplayView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

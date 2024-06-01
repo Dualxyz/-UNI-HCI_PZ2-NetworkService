@@ -26,7 +26,7 @@
             
         <StackPanel>
             <StackPanel>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Background="#D9D9D9" VerticalAlignment="Top" Width="722" Height="40" Grid.ColumnSpan="2">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Background="Gold" VerticalAlignment="Top" Width="722" Height="40" Grid.ColumnSpan="2">
                 <Label x:Name="label45" Content="NETWORK ENTITIES VIEW" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
         </StackPanel>

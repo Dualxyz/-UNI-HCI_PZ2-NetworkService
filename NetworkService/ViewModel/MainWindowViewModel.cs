@@ -82,23 +82,27 @@ namespace NetworkService.ViewModel
 
         private void WriteLog(int id, double value)
         {
-            if (!file)
+            StreamWriter wr;
+            using (wr = new StreamWriter(path.ToString(), true))
             {
-                StreamWriter wr;
-                using (wr = new StreamWriter(path.ToString()))
-                {
-                    wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
-                }
+                wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
             }
-            else
-            {
-                StreamWriter wr;
-                using (wr = new StreamWriter(path.ToString(), true))
-                {
-                    wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
-                }
-            }
-            file = true;
+
+            //if (!file)
+            //{
+            //    using (wr = new StreamWriter(path.ToString(), true))
+            //    {
+            //        wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
+            //    }
+            //}
+            //else
+            //{
+            //    using (wr = new StreamWriter(path.ToString(), true))
+            //    {
+            //        wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
+            //    }
+            //}
+            //file = true;
         }
     }
 }

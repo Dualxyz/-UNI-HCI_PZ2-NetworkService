@@ -15,7 +15,7 @@
     <UserControl.DataContext>
         <viewModel:NetworkDisplayViewModel />
     </UserControl.DataContext>
-    
+
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -30,24 +30,26 @@
                 <local:MeasurementGraphView></local:MeasurementGraphView>
             </DataTemplate>
         </ResourceDictionary>
-        
+
     </UserControl.Resources>
 
     <Grid Background="White" MouseLeftButtonDown="MainGrid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="440*"></RowDefinition>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="467*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="282"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="331"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="3">
             <Border Background="#D9D9D9" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="934" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-18,0,0,0">
                 <StackPanel>
                     <StackPanel>
-                        <Label x:Name="label" Content="NETWORK SERVICE" FontSize="24" Margin="43,9,20,882"/>
+                        <Label x:Name="label" Content="NetworkService" FontSize="36" Margin="18,9,20,882" Width="280"/>
                     </StackPanel>
                     <StackPanel Margin="0,-50">
                         <StackPanel>
@@ -62,11 +64,11 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="35,16,35,0">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Background="#D9D9D9" VerticalAlignment="Top" Width="722" Height="40" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="1" Margin="35,16,35,0" Grid.RowSpan="3">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Background="Gold" VerticalAlignment="Top" Width="722" Height="40" Grid.ColumnSpan="2">
                 <Label x:Name="label1" Content="NETWORK DISPLAY VIEW" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
-            <Canvas Width="722" Height="227" Background="LightGray" Margin="-18,24,0,0">
+            <Canvas Width="722" Height="227" Background="Gold" Margin="-18,24,0,0">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
                         <StackPanel>
@@ -332,7 +334,7 @@
             </StackPanel>
             <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
         </StackPanel>
-        <StackPanel Grid.Column="2" Margin="0,16,40,23">
+        <StackPanel Grid.Column="1" Margin="792,16,40,23" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <Border Margin="0,0,0,34" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="290" Background="#D9D9D9" Grid.ColumnSpan="2">
                 <Label x:Name="label2" FontSize="24" Content="Entity List" HorizontalAlignment="Center" VerticalAlignment="Center" Height="47"/>
             </Border>

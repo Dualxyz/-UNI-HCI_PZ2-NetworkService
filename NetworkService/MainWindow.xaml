@@ -22,6 +22,6 @@
     </Window.Resources>
 
     <Grid>
-        <views:NetworkDisplayView></views:NetworkDisplayView>
+        <views:NetworkDisplayView Loaded="NetworkDisplayView_Loaded"></views:NetworkDisplayView>
     </Grid>
 </Window>
