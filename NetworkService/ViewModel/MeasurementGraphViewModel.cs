@@ -16,10 +16,10 @@ namespace NetworkService.ViewModel
     {
         private DispatcherTimer _timer;
         public ObservableCollection<CircleMarker> CircleMarkers { get; set; } = new ObservableCollection<CircleMarker>();
-        public MyICommand DebugCommand { get; set; }
+        public MyICommand RefreshCommand { get; set; }
         public MeasurementGraphViewModel()
         {
-            DebugCommand = new MyICommand(OnDebug);
+            RefreshCommand = new MyICommand(OnRefresh);
             SetUpTimer();
 
         }
@@ -30,11 +30,11 @@ namespace NetworkService.ViewModel
             {
                 Interval = TimeSpan.FromSeconds(0.5)
             };
-            _timer.Tick += (sender, args) => OnDebug();
+            _timer.Tick += (sender, args) => OnRefresh();
             _timer.Start();
         }
 
-        private void OnDebug()
+        private void OnRefresh()
         {
             try
             {
@@ -52,15 +52,12 @@ namespace NetworkService.ViewModel
             {
 
             }
-            
-            
         }
 
         private List<CircleMarker> LoadLastFiveUpdates(string selectedType)
         {
             if (!File.Exists("LogFile.txt"))
             {
-                //ErrorMessage = "Log file doesn't exist.";
                 return null;
             }
 
@@ -109,18 +106,9 @@ namespace NetworkService.ViewModel
                 {
                     CircleMarkers.Add(marker);
                 }
-                //for (int i = 0; i <= 4; i++)
-                //{
-                //    CircleMarkers[i].CmType = markers[4 - i].CmType;
-                //    CircleMarkers[i].CmValue = markers[4 - i].CmValue;
-                //    CircleMarkers[i].CmDate = markers[4 - i].CmDate;
-                //    CircleMarkers[i].CmTime = markers[4 - i].CmTime;
-                //}
             }
             else
             {
-                // Ako se u log fajlu nalazi manje od 5 promena vrednosti
-                // Na kruzice se postavljaju default vrednosti
                 SetDefaultValuesToCircleMarkers();
             }
         }

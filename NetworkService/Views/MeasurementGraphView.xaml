@@ -81,7 +81,7 @@
                         <TextBlock Style="{StaticResource GraphTextColor}" Text="{Binding CircleMarkers[4].CmTime}" Width="80" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
                     </Grid>
                 </Canvas>
-            <Button Content="Test" Command="{Binding DebugCommand}"></Button>
+            <Button Content="Test" ></Button>
             </StackPanel>
         </Border>
     </Grid>

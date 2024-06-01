@@ -220,7 +220,7 @@ namespace NetworkService.ViewModel
         }
         private void OnAdd()
         {
-            MessageBox.Show($"{SelectedTypeForAdding} je selektovan");
+            //MessageBox.Show($"{SelectedTypeForAdding} je selektovan");
             var tempEntity = new T4_Entity(EntityId1++, (EntityType)Enum.Parse(typeof(EntityType), SelectedTypeForAdding));
             EntityList.Add(tempEntity);
             TableEntityList.Add(tempEntity);
@@ -228,12 +228,14 @@ namespace NetworkService.ViewModel
             StackOfOperations.Push(true);
             Database.Database.Entities.Add(tempEntity);
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var smt in Database.Database.Entities)
-            {
-                sb.Append(smt.Name.ToString() + "\n");
-            }
-            MessageBox.Show(sb.ToString());
+            Database.Database.DraggableEntities.Add(tempEntity);
+
+            //StringBuilder sb = new StringBuilder();
+            //foreach (var smt in Database.Database.Entities)
+            //{
+            //    sb.Append(smt.Name.ToString() + "\n");
+            //}
+            //MessageBox.Show(sb.ToString());
 
             SavedList.Clear();
             foreach (var entity in EntityList)
@@ -249,7 +251,10 @@ namespace NetworkService.ViewModel
             SavedList.Remove(itemToRemove);
             TableEntityList.Remove(itemToRemove);
             DeletedEntities.Push(itemToRemove);
+
             Database.Database.Entities.Remove(itemToRemove);
+            Database.Database.DraggableEntities.Remove(itemToRemove);
+
             StackOfOperations.Push(false);
         }
 
@@ -339,6 +344,7 @@ namespace NetworkService.ViewModel
                     TableEntityList.Remove(removedAddedEntity);
 
                     Database.Database.Entities.Remove(removedAddedEntity);
+                    Database.Database.DraggableEntities.Remove(removedAddedEntity);
                 }
                 else
                 {
@@ -348,6 +354,7 @@ namespace NetworkService.ViewModel
                     TableEntityList.Add(removedDeletedEntity);
 
                     Database.Database.Entities.Add(removedDeletedEntity);
+                    Database.Database.DraggableEntities.Add(removedDeletedEntity);
                 }
             }
         }
