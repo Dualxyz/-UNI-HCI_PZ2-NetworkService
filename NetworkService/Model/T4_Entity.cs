@@ -13,14 +13,14 @@ namespace NetworkService.Model
         private int _id;
         private string _name;
         private EntityType _entityType;
-        private double _value;
+        private int _value;
 
         public T4_Entity(int id, EntityType entityType)
         {
             Id = id;
             EntityType = entityType;
             Name = $"ID{_id}_TYPE{entityType}";
-            Value = random.NextDouble() * 5.0;
+            Value = random.Next(1, 6);
         }
 
         public int Id
@@ -53,7 +53,7 @@ namespace NetworkService.Model
             }
         }
 
-        public double Value
+        public int Value
         {
             get => _value;
             set

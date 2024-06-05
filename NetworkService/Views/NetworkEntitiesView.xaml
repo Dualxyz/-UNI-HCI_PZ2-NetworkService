@@ -40,16 +40,16 @@
                 <TextBox BorderBrush="Black" x:Name="textBox" Text="{Binding ItemIdTextBox}" BorderThickness="2.48" FontSize="26" TextAlignment="Center" VerticalContentAlignment="Center" Width="143" Height="50"/>
             </StackPanel>
             <StackPanel Margin="0,26,26,0">
-                <RadioButton Command="{Binding EqualsRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton" Content="= (Equals)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <RadioButton Command="{Binding LessRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton1" Content="&lt; (Less)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <RadioButton Command="{Binding GreaterRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton2" Content="&gt; (Greater)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <RadioButton IsChecked="{Binding IsOption1Checked}" Command="{Binding EqualsRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton" Content="= (Equals)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <RadioButton IsChecked="{Binding IsOption2Checked}" Command="{Binding LessRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton1" Content="&lt; (Less)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <RadioButton IsChecked="{Binding IsOption3Checked}" Command="{Binding GreaterRadioButtonCommand}" FontSize="16" Margin="0,0,0,5" x:Name="radioButton2" Content="&gt; (Greater)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Background="Transparent">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                    <Button Command="{Binding FilterCommand}" x:Name="FilterButton" Margin="0,0,11,0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="108" Height="40" Content="FILTER" Click="FilterButton_Click"/>
-                    <Button x:Name="ResetButton" Margin="16,0,0,0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Right" Width="108" Height="40" Content="RESET" Grid.ColumnSpan="2" Click="ResetButton_Click"/>
+                    <Button Background="Aqua" Command="{Binding FilterCommand}" x:Name="FilterButton" Margin="0,0,11,0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="108" Height="40" Content="FILTER" Click="FilterButton_Click"/>
+                    <Button Background="Aqua" Command="{Binding ResetCommand}" x:Name="ResetButton" Margin="16,0,0,0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Right" Width="108" Height="40" Content="RESET" Grid.ColumnSpan="2" Click="ResetButton_Click"/>
                 </StackPanel>
-                <Button x:Name="SaveToProfileButton" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="243" Height="40" Content="SAVE TO PROFILE" Click="SaveToProfileButton_Click"/>
+                        <Button Background="Aqua" Command="{Binding SaveToProfileCommand}" x:Name="SaveToProfileButton" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="243" Height="40" Content="SAVE TO PROFILE" Click="SaveToProfileButton_Click"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Margin="0,16,0,0">
@@ -73,7 +73,7 @@
                     <Button Command="{Binding DeleteCommand}" x:Name="DeleteButton" Margin="16,0,0,0" Style="{StaticResource RoundedButton}" HorizontalAlignment="Right" Width="108" Height="40" Content="DELETE" Grid.ColumnSpan="2" Click="DeleteButton_Click"
                         Background="{Binding IsSelectedDeleteButton, Converter={StaticResource ColorConverter}}"/>
                 </StackPanel>
-                <Button Command="{Binding UndoCommand}" x:Name="SaveToProfileButton1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="243" Height="40" Content="UNDO" Click="SaveToProfileButton1_Click"/>
+                        <Button Command="{Binding UndoCommand}" Background="{Binding IsSelectedUndoButton, Converter={StaticResource ColorConverter}}" x:Name="SaveToProfileButton1" Style="{StaticResource RoundedButton}" HorizontalAlignment="Left" Width="243" Height="40" Content="UNDO" Click="SaveToProfileButton1_Click"/>
             </StackPanel>
         </StackPanel>
         </StackPanel>
@@ -82,10 +82,10 @@
             <Border Margin="0,0,0,34" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="290" Background="#D9D9D9" Grid.ColumnSpan="2">
                 <Label x:Name="label2" FontSize="24" Content="Entity List" HorizontalAlignment="Center" VerticalAlignment="Center" Height="47"/>
             </Border>
-            <ListView SelectedItem="{Binding SelectedEntityFromEntityList}" ItemsSource="{Binding EntityList}" Height="790" BorderBrush="Black" BorderThickness="2.48" x:Name="lvList" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listBox_SelectionChanged">
+            <ListView SelectedItem="{Binding SelectedEntityFromEntityList}" ItemsSource="{Binding EntityList}" Height="790" BorderBrush="Black" BorderThickness="2.48" x:Name="ListViewOfEntities" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listBox_SelectionChanged">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged" >
-                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=lvList}" />
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=ListViewOfEntities}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseLeftButtonUp" >
                         <i:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}" />

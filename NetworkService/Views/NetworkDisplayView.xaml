@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <extension:ColorConverter x:Key="ColorConverter"></extension:ColorConverter>
+            <extension:StaticListElementConverter x:Key="StaticListElementConverter"></extension:StaticListElementConverter>
             <DataTemplate DataType="{x:Type viewModel:NetworkEntitiesViewModel}">
                 <local:NetworkEntitiesView></local:NetworkEntitiesView>
             </DataTemplate>
@@ -46,7 +47,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3">
-            <Border Background="#D9D9D9" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="934" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-18,0,0,0">
+            <Border Background="Gold" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="934" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-18,0,0,0">
                 <StackPanel>
                     <StackPanel>
                         <Label x:Name="label" Content="NetworkService" FontSize="36" Margin="18,9,20,882" Width="280"/>
@@ -59,6 +60,10 @@
                         <StackPanel>
                             <Image Source="pack://application:,,,/Images/Icons/graph.png" Width="24" Height="24" Margin="-235,-1240,0,0"></Image>
                             <Button Command="{Binding NavCommand}" CommandParameter="MeasurementGraph" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Left" Height="80" x:Name="MeasurementGraph" Content="Measurement Graph" FontSize="26" Margin="45 ,-1240,0,0"></Button>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label FontSize="24" HorizontalAlignment="Center" Margin="0,-570,0,0" Content="Saved Profiles"></Label>
+                            <ComboBox Margin="0,-1000,0,0" SelectedItem="{Binding ProfileSaverSelection}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" ItemsSource="{Binding Source={x:Static db:Database.ProfileSaverList}}" BorderBrush="Black" x:Name="comboBox" BorderThickness="2.48" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" Height="49" SelectionChanged="comboBox_SelectionChanged"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -307,6 +312,7 @@
                         <StackPanel>
                             <Border BorderBrush="Aqua" BorderThickness="2" Height="88" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,0,0,0">
                                 <ContentControl Content="{Binding Path=CanvasCollection[11]}">
+                                <!--<ContentControl Content="{Binding Converter={StaticResource StaticListElementConverter}, ConverterParameter=11}">-->
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Drop">
                                             <i:InvokeCommandAction Command="{Binding DropEntityOnCanvas}" CommandParameter="11"/>
@@ -329,19 +335,19 @@
                 </StackPanel>
             </Canvas>
             <StackPanel Orientation="Horizontal" Margin="0, 24">
-                <Button Margin="0,0,32,0" Style="{StaticResource RoundedButton}" x:Name="AutoFillButton" Width="345" Height="40" Content="AUTO FILL" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AutoFillButton_Click"/>
-                <Button Style="{StaticResource RoundedButton}" x:Name="UndoButton" Width="345" Height="40" Content="UNDO" HorizontalAlignment="Left" VerticalAlignment="Top" Click="UndoButton_Click"/>
+                <Button Background="Aqua" Command="{Binding AutoFillButton}" Margin="0,0,32,0" Style="{StaticResource RoundedButton}" x:Name="AutoFillButton" Width="345" Height="40" Content="AUTO FILL" HorizontalAlignment="Left" VerticalAlignment="Top" Click="AutoFillButton_Click"/>
+                <Button Background="Aqua" Command="{Binding UndoDPButton}" Style="{StaticResource RoundedButton}" x:Name="UndoButton" Width="345" Height="40" Content="UNDO" HorizontalAlignment="Left" VerticalAlignment="Top" Click="UndoButton_Click"/>
             </StackPanel>
             <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="792,16,40,23" Grid.ColumnSpan="2" Grid.RowSpan="3">
-            <Border Margin="0,0,0,34" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="290" Background="#D9D9D9" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="2" Margin="0,16,31,0" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Border Margin="0,0,0,34" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="300" Background="Gold" Grid.ColumnSpan="2">
                 <Label x:Name="label2" FontSize="24" Content="Entity List" HorizontalAlignment="Center" VerticalAlignment="Center" Height="47"/>
             </Border>
-            <ListView SelectedItem="{Binding SelectedEntity}" ItemsSource="{Binding Source={x:Static db:Database.DraggableEntities}}" Height="790" BorderBrush="Black" BorderThickness="2.48" x:Name="lvList" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listBox_SelectionChanged">
+            <ListView SelectedItem="{Binding SelectedEntity}" ItemsSource="{Binding Source={x:Static db:Database.DraggableEntities}}" Height="790" BorderBrush="Black" BorderThickness="2.48" x:Name="ListViewOfEntities" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="listBox_SelectionChanged">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged" >
-                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding ElementName=lvList}" />
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding ElementName=ListViewOfEntities}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseLeftButtonUp" >
                         <i:InvokeCommandAction Command="{Binding MouseLeftButtonUp}" />

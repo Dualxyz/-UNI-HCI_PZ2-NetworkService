@@ -14,8 +14,8 @@ namespace NetworkService.ViewModel
     public class MainWindowViewModel
     {
         private int id;
-        private double value;
-        private bool file;
+        private int value;
+        //private bool file;
         private readonly Uri path = new Uri("LogFile.txt", UriKind.Relative);
 
         public MainWindowViewModel()
@@ -64,7 +64,7 @@ namespace NetworkService.ViewModel
                             // Azuriranje potrebnih stvari u aplikaciji
                             string[] split = incomming.Split('_', ':');
                             id = Int32.Parse(split[1]);
-                            value = Double.Parse(split[2]);
+                            value = Int32.Parse(split[2]);
                             Console.WriteLine($"Changing the {id} to {value}");
                             if (Database.Database.Entities.Count() > 0 && (Database.Database.Entities.Count() > id) && value <= 5 && value >= 1)
                             {
@@ -87,22 +87,6 @@ namespace NetworkService.ViewModel
             {
                 wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
             }
-
-            //if (!file)
-            //{
-            //    using (wr = new StreamWriter(path.ToString(), true))
-            //    {
-            //        wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
-            //    }
-            //}
-            //else
-            //{
-            //    using (wr = new StreamWriter(path.ToString(), true))
-            //    {
-            //        wr.WriteLine("Date Time:\t" + DateTime.Now.ToString() + "\tObject_" + id + "\tValue:\t" + value);
-            //    }
-            //}
-            //file = true;
         }
     }
 }

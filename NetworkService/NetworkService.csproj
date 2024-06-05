@@ -67,10 +67,13 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Extension\ColorConverter.cs" />
+    <Compile Include="Extension\StaticListElementConverter.cs" />
     <Compile Include="Model\CircleMarker.cs" />
     <Compile Include="Model\EntityType.cs" />
     <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\FilterRadioEnum.cs" />
+    <Compile Include="Model\MyLine.cs" />
+    <Compile Include="Model\ProfileSaver.cs" />
     <Compile Include="Model\StaticData.cs" />
     <Compile Include="Model\T4_Entity.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
